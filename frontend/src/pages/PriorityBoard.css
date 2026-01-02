@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.board-page-wrapper {
+
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #f1f5f9;
+}
+
+.board-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.board-intro {
+  text-align: left;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 20px;
+}
+
+.board-intro h1 {
+  font-size: 28px; 
+  font-weight: 700;
+  color: #1f2937; 
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.board-intro p {
+  font-size: 14px;
+  color: rgba(241, 245, 249, 0.8);
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.priority-board-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.priority-column {
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.priority-column-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-header-high { background: #ef4444; } 
+.p-header-medium { background: #f59e0b; }
+.p-header-low { background: #10b981; }
+
+.priority-column-header h2 {
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.task-count-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.priority-column-content {
+  padding: 16px;
+  min-height: 500px;
+}
+
+.priority-task-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.priority-task-card:hover {
+  transform: translateY(-5px);
+}
+
+.priority-task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.priority-task-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800; 
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.status-pill {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.priority-task-description {
+  font-size: 13px;
+  color: #475569;
+  margin: 12px 0;
+  line-height: 1.5;
+  font-weight: 600; 
+}
+
+.priority-task-meta {
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.meta-item {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.meta-item strong {
+  color: #1e293b;
+  font-weight: 800;
+}
+
+.priority-task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.priority-move-btn {
+  flex: 1;
+  padding: 9px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.move-up-vibrant {
+  background: #6366f1;
+  color: white;
+}
+
+.move-down-vibrant {
+  background: #94a3b8;
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 40px 0;
+  font-weight: 600;
+}
+
+.board-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 0;
+  color: white;
+}

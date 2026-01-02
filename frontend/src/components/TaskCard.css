@@ -1,0 +1,128 @@
+/* Import a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.task-card {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #ffffff;
+  border-radius: 20px; /* Softer corners */
+  padding: 28px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #f1f5f9;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #e2e8f0;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between; /* Spread badges out */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Priority Badges - Modern Flat Style */
+.priority-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.priority-high { background: #fee2e2; color: #dc2626; }
+.priority-medium { background: #ffedd5; color: #d97706; }
+.priority-low { background: #dcfce7; color: #16a34a; }
+
+/* Status Badges - Minimalist pill style */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-pending { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+.status-pending::before { background: #94a3b8; }
+
+.status-completed { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.status-completed::before { background: #22c55e; }
+
+/* Typography Improvements */
+.task-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a; /* Slate 900 */
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.task-description {
+  color: #64748b; /* Slate 500 */
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.task-meta {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  margin-bottom: 24px;
+}
+
+.task-meta-item {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between; /* Clean table-like look */
+}
+
+.task-meta-item strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Button Refinement */
+.task-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.btn {
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.9; }
+
+/* Desktop-specific layout tweak */
+@media (min-width: 768px) {
+  .task-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

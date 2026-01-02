@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.task-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Higher than any navbar */
+  padding: 20px;
+}
+
+.task-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh; /* Prevents it from going off screen */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important! */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header with Vibrant Gradient */
+.task-modal-header {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  padding: 24px 30px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-text h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.header-text p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.close-x {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Scrollable Form Area */
+.task-modal-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.form-inner-body {
+  padding: 25px 30px;
+  overflow-y: auto; /* Allows scrolling inside form if content is long */
+}
+
+.task-input-group {
+  margin-bottom: 18px;
+}
+
+.task-input-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.task-custom-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #f1f5f9;
+  border-radius: 10px;
+  background: #f8fafc;
+  font-size: 14px;
+  color: #1e293b;
+  transition: 0.2s;
+}
+
+.task-custom-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: white;
+}
+
+.task-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.task-assignee-info {
+  background: #f0f7ff;
+  padding: 12px;
+  border-radius: 10px;
+  color: #1e40af;
+  font-size: 13px;
+}
+
+.task-error-msg {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Footer (Always Fixed at bottom) */
+.task-modal-footer {
+  padding: 20px 30px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.task-btn-secondary {
+  background: #e2e8f0;
+  color: #475569;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.task-btn-primary {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.task-btn-primary:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
