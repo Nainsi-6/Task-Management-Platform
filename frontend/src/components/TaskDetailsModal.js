@@ -13,80 +13,87 @@ const TaskDetailsModal = ({ task, onClose }) => {
   }
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal modal-large" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <div>
+    <div className="task-modal-overlay" onClick={onClose}>
+      {/* Added task-modal-content and modal-large for better width */}
+      <div className="task-modal-content" style={{ maxWidth: '650px' }} onClick={(e) => e.stopPropagation()}>
+        
+        {/* HEADER: Matches Create Modal exactly */}
+        <div className="task-modal-header">
+          <div className="header-text">
             <h2>Task Details</h2>
-            <p className="modal-subtitle">Complete task information</p>
+            <p>Complete information for this task</p>
           </div>
-          <button className="modal-close" onClick={onClose}>
-            &times;
-          </button>
+          <button className="close-x" onClick={onClose}>&times;</button>
         </div>
 
-        <div className="task-details">
-          <div className="detail-section">
-            <h3 className="detail-section-title">Basic Information</h3>
-
-            <div className="detail-row">
-              <strong>Title:</strong>
-              <span className="detail-value">{task.title}</span>
+        {/* BODY: Uses form-inner-body for consistent padding and scrolling */}
+        <div className="form-inner-body">
+          
+          {/* Section: Basic Info */}
+          <div className="task-input-group" style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '15px' }}>
+            <label>Basic Information</label>
+            <div style={{ marginBottom: '10px' }}>
+              <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>TITLE</span>
+              <div style={{ fontSize: '18px', fontWeight: '700', color: '#1e293b', marginTop: '4px' }}>{task.title}</div>
             </div>
-
-            <div className="detail-row">
-              <strong>Description:</strong>
-              <p className="detail-description">{task.description}</p>
-            </div>
-
-            <div className="detail-row">
-              <strong>Due Date:</strong>
-              <span className="detail-value">{formatDate(task.dueDate)}</span>
+            <div>
+              <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>DESCRIPTION</span>
+              <p style={{ fontSize: '14px', color: '#475569', lineHeight: '1.6', marginTop: '4px', whiteSpace: 'pre-wrap' }}>
+                {task.description}
+              </p>
             </div>
           </div>
 
-          <div className="detail-section">
-            <h3 className="detail-section-title">Status & Priority</h3>
-
-            <div className="detail-row">
-              <strong>Priority:</strong>
-              <span className={`priority-badge priority-${task.priority}`}>{task.priority.toUpperCase()}</span>
+          {/* Section: Status & Priority in a Row */}
+          <div className="task-input-row" style={{ marginTop: '20px' }}>
+            <div className="task-input-group">
+              <label>Status</label>
+              <span className={`status-badge status-${task.status}`} style={{ display: 'inline-block' }}>
+                {task.status.toUpperCase()}
+              </span>
             </div>
-
-            <div className="detail-row">
-              <strong>Status:</strong>
-              <span className={`status-badge status-${task.status}`}>{task.status}</span>
+            <div className="task-input-group">
+              <label>Priority</label>
+              <span className={`priority-badge priority-${task.priority}`} style={{ display: 'inline-block' }}>
+                {task.priority.toUpperCase()}
+              </span>
             </div>
           </div>
 
-          <div className="detail-section">
-            <h3 className="detail-section-title">Assignment & Tracking</h3>
+          {/* Section: Dates */}
+          <div className="task-input-row">
+             <div className="task-input-group">
+                <label>Due Date</label>
+                <div style={{ fontSize: '14px', fontWeight: '600', color: '#1e293b' }}>{formatDate(task.dueDate)}</div>
+             </div>
+             <div className="task-input-group">
+                <label>Created At</label>
+                <div style={{ fontSize: '14px', color: '#64748b' }}>{formatDate(task.createdAt)}</div>
+             </div>
+          </div>
 
-            <div className="detail-row">
-              <strong>Assigned To:</strong>
-              <div className="detail-user-info">
-                <span className="detail-user-name">{task.assignedTo.name}</span>
-                <span className="detail-user-email">{task.assignedTo.email}</span>
+          {/* Section: Assignment Info */}
+          <div style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="task-input-group">
+              <label>Assigned To</label>
+              <div className="task-assignee-info" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                <div style={{ fontWeight: '700', color: '#1e293b' }}>{task.assignedTo.name}</div>
+                <div style={{ fontSize: '12px', color: '#64748b' }}>{task.assignedTo.email}</div>
               </div>
             </div>
-
-            <div className="detail-row">
-              <strong>Created By:</strong>
-              <div className="detail-user-info">
-                <span className="detail-user-name">{task.createdBy.name}</span>
-                <span className="detail-user-email">{task.createdBy.email}</span>
+            <div className="task-input-group">
+              <label>Created By</label>
+              <div className="task-assignee-info" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                <div style={{ fontWeight: '700', color: '#1e293b' }}>{task.createdBy.name}</div>
+                <div style={{ fontSize: '12px', color: '#64748b' }}>{task.createdBy.email}</div>
               </div>
-            </div>
-
-            <div className="detail-row">
-              <strong>Created At:</strong>
-              <span className="detail-value">{formatDate(task.createdAt)}</span>
             </div>
           </div>
         </div>
 
-        <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={onClose}>
+        {/* FOOTER: Fixed at bottom */}
+        <div className="task-modal-footer">
+          <button className="task-btn-secondary" onClick={onClose}>
             Close
           </button>
         </div>

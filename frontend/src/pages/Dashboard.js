@@ -15,8 +15,12 @@ const Dashboard = () => {
   const { isAdmin, user } = useAuth()
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
+  
+  // Pagination State
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const limit = 6 // Tasks per page
+
   const [priorityFilter, setPriorityFilter] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
 
@@ -29,13 +33,16 @@ const Dashboard = () => {
   const fetchTasks = useCallback(async () => {
     try {
       setLoading(true)
-      const params = { page, limit: 10 }
+      // Pass pagination parameters to the API
+      const params = { page, limit }
       if (priorityFilter) params.priority = priorityFilter
       if (statusFilter) params.status = statusFilter
 
       const response = await api.get("/api/tasks", { params })
+      
+      // Assumes backend returns { tasks: [], totalPages: x, currentPage: y }
       setTasks(response.data.tasks)
-      setTotalPages(response.data.totalPages)
+      setTotalPages(response.data.totalPages || 1)
     } catch (error) {
       console.error("Failed to fetch tasks:", error)
     } finally {
@@ -46,6 +53,15 @@ const Dashboard = () => {
   useEffect(() => {
     fetchTasks()
   }, [fetchTasks])
+
+  // Pagination Handlers
+  const handlePrevPage = () => {
+    if (page > 1) setPage(page - 1)
+  }
+
+  const handleNextPage = () => {
+    if (page < totalPages) setPage(page + 1)
+  }
 
   const handleEditTask = (task) => {
     setSelectedTask(task)
@@ -117,7 +133,7 @@ const Dashboard = () => {
               value={priorityFilter}
               onChange={(e) => {
                 setPriorityFilter(e.target.value)
-                setPage(1)
+                setPage(1) // Reset to first page on filter change
               }}
             >
               <option value="">All Priorities</option>
@@ -134,7 +150,7 @@ const Dashboard = () => {
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value)
-                setPage(1)
+                setPage(1) // Reset to first page on filter change
               }}
             >
               <option value="">All Status</option>
@@ -213,27 +229,28 @@ const Dashboard = () => {
                     </div>
                   </div>
                 )}
-
-                {myCreatedTasks.length === 0 && assignedByAdminTasks.length === 0 && (
-                  <div className="empty-state">
-                    <div className="empty-icon">📋</div>
-                    <h3>No tasks found</h3>
-                    <p>Create your first task to get started</p>
-                  </div>
-                )}
               </>
             )}
 
+            {/* Pagination UI */}
             {totalPages > 1 && (
               <div className="pagination">
-                <button className="btn btn-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
-                  ← Previous
+                <button 
+                  className="btn btn-secondary" 
+                  onClick={handlePrevPage} 
+                  disabled={page === 1}
+                >
+                  &larr; Previous
                 </button>
                 <span className="page-info">
                   Page {page} of {totalPages}
                 </span>
-                <button className="btn btn-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
-                  Next →
+                <button 
+                  className="btn btn-secondary" 
+                  onClick={handleNextPage} 
+                  disabled={page === totalPages}
+                >
+                  Next &rarr;
                 </button>
               </div>
             )}

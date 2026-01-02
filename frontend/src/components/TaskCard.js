@@ -4,7 +4,10 @@ import "./TaskCard.css"
 
 const TaskCard = ({ task, onEdit, onDelete, onViewDetails, onStatusChange }) => {
   const { isAdmin, user } = useAuth()
-  const isCreator = task.createdBy._id === user.id
+  
+  // Safety check for creator ID
+  const isCreator = task.createdBy?._id === user?.id
+
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -25,38 +28,34 @@ const TaskCard = ({ task, onEdit, onDelete, onViewDetails, onStatusChange }) => 
 
       <div className="task-meta">
         <div className="task-meta-item">
-          <strong>Due Date:</strong> {formatDate(task.dueDate)}
+          <strong>Due Date:</strong> <span>{formatDate(task.dueDate)}</span>
         </div>
         <div className="task-meta-item">
-          <strong>Assigned To:</strong> {task.assignedTo.name}
-        </div>
-        <div className="task-meta-item">
-          <strong>Created By:</strong> {task.createdBy.name}
+          <strong>Assigned To:</strong> <span>{task.assignedTo.name}</span>
         </div>
       </div>
 
       <div className="task-actions">
-        <button className="btn btn-secondary btn-sm" onClick={() => onViewDetails(task)}>
-          View Details
+        <button className="btn-card btn-details" onClick={() => onViewDetails(task)}>
+          Details
         </button>
 
         {task.status === "pending" ? (
-          <button className="btn btn-success btn-sm" onClick={() => onStatusChange(task._id, "completed")}>
-            Mark Complete
+          <button className="btn-card btn-complete" onClick={() => onStatusChange(task._id, "completed")}>
+          ✓ DONE
           </button>
         ) : (
-          <button className="btn btn-secondary btn-sm" onClick={() => onStatusChange(task._id, "pending")}>
-            Mark Pending
+          <button className="btn-card btn-details" onClick={() => onStatusChange(task._id, "pending")}>
+            Reopen
           </button>
         )}
 
         {(isAdmin || isCreator) && (
           <>
-            <button className="btn btn-primary btn-sm" onClick={() => onEdit(task)}>
+            <button className="btn-card btn-edit" onClick={() => onEdit(task)}>
               Edit
             </button>
-
-            <button className="btn btn-danger btn-sm" onClick={() => onDelete(task)}>
+            <button className="btn-card btn-delete" onClick={() => onDelete(task)}>
               Delete
             </button>
           </>

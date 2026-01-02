@@ -1,100 +1,84 @@
-/* Import a modern font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 .task-card {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: #ffffff;
-  border-radius: 20px; /* Softer corners */
-  padding: 28px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid #f1f5f9;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
+  height: 100%;
 }
 
 .task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   border-color: #e2e8f0;
 }
 
+/* Header & Badges */
 .task-card-header {
   display: flex;
-  justify-content: space-between; /* Spread badges out */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-/* Priority Badges - Modern Flat Style */
 .priority-badge {
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .priority-high { background: #fee2e2; color: #dc2626; }
 .priority-medium { background: #ffedd5; color: #d97706; }
 .priority-low { background: #dcfce7; color: #16a34a; }
 
-/* Status Badges - Minimalist pill style */
 .status-badge {
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: 100px;
-  font-size: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.status-badge::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-
-.status-pending { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
-.status-pending::before { background: #94a3b8; }
-
-.status-completed { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
-.status-completed::before { background: #22c55e; }
-
-/* Typography Improvements */
-.task-title {
-  font-size: 20px;
+  font-size: 11px;
   font-weight: 700;
-  color: #0f172a; /* Slate 900 */
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+/* Typography */
+.task-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
 }
 
 .task-description {
-  color: #64748b; /* Slate 500 */
-  font-size: 14px;
-  font-weight: 400;
+ color: #334155; 
+  font-size: 13px;
+  font-weight: 500; /* Increased weight from 400 to 600 */
   line-height: 1.6;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  /* Added contrast boost */
+  text-rendering: optimizeLegibility;
 }
 
 .task-meta {
   border-top: 1px solid #f1f5f9;
-  padding-top: 20px;
-  margin-bottom: 24px;
+  padding-top: 15px;
+  margin-bottom: 15px;
 }
 
 .task-meta-item {
-  font-size: 13px;
+  font-size: 12px;
   color: #64748b;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: flex;
-  justify-content: space-between; /* Clean table-like look */
+  justify-content: space-between;
 }
 
 .task-meta-item strong {
@@ -102,27 +86,43 @@
   font-weight: 600;
 }
 
-/* Button Refinement */
+/* BUTTONS - This is the "Dashboard" look */
 .task-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap; /* Allows 2x2 grid when needed, or a single row */
   gap: 8px;
   margin-top: auto;
 }
 
-.btn {
-  border-radius: 10px;
-  padding: 10px;
-  font-weight: 600;
-  font-size: 13px;
-  transition: opacity 0.2s;
+.btn-card {
+  flex: 1; /* Buttons share width equally */
+  min-width: calc(50% - 8px); /* Forces a 2-column layout when 4 buttons exist */
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn:hover { opacity: 0.9; }
+/* Modern Color Palette */
+.btn-details { background: #f1f5f9; color: #475569; }
+.btn-complete { background: #10b981; color: white; }
+.btn-edit { background: #6366f1; color: white; }
+.btn-delete { background: #ef4444; color: white; }
 
-/* Desktop-specific layout tweak */
-@media (min-width: 768px) {
-  .task-actions {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* If a button is the only one in its row, it stays slim */
+.btn-card:only-child {
+  min-width: 100%;
+}
+
+.btn-card:hover {
+  filter: brightness(90%);
+  transform: translateY(-1px);
 }

@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
-  padding-top: 24px;
+  margin-bottom: 24px; /* Reduced from 32px */
+  padding-top: 10px;    /* Reduced from 24px */
 }
 
 .dashboard-header h1 {
@@ -232,4 +232,44 @@ font-size: 14px;
   .section-subtitle {
     font-size: 13px;
   }
+}
+
+.pagination .btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+}
+
+.pagination .btn-secondary:hover:not(:disabled) {
+  background: #ffffff;
+  color: #6366f1; /* Indigo color on hover */
+  transform: translateY(-1px);
+}
+
+.pagination .btn-secondary:disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+}
+
+/* Page info text */
+.page-info {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* Adjust filters spacing if needed */
+.filters {
+  margin-bottom: 24px; /* Matches header margin */
 }

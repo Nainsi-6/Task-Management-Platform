@@ -4,10 +4,12 @@ import { useState, useEffect } from "react"
 import api from "../config/api"
 import { useAuth } from "../context/AuthContext"
 import "./Modal.css"
+import { useNavigate } from "react-router-dom" // Add this
 
 const CreateTaskModal = ({ onClose, onCreate }) => {
   const { user, isAdmin } = useAuth()
   const [users, setUsers] = useState([])
+  const navigate = useNavigate() // Add this
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -47,7 +49,14 @@ const CreateTaskModal = ({ onClose, onCreate }) => {
         assignedTo: isAdmin ? formData.assignedTo : user._id,
       }
       await api.post("/api/tasks", taskData)
-      onCreate() // This should trigger the close and refresh
+      onCreate() 
+
+    
+    // 2. Navigate back to the dashboard
+    navigate("/dashboard") 
+    
+    // 3. Ensure the modal closes (if onCreate doesn't already do it)
+    onClose()
     } catch (err) {
       setError(err.response?.data?.error || "Failed to create task")
     } finally {
@@ -62,7 +71,6 @@ const CreateTaskModal = ({ onClose, onCreate }) => {
   return (
     <div className="task-modal-overlay" onClick={onClose}>
       <div className="task-modal-content" onClick={(e) => e.stopPropagation()}>
-        {/* VIBRANT HEADER */}
         <div className="task-modal-header">
           <div className="header-text">
             <h2>Create New Task</h2>
@@ -71,7 +79,6 @@ const CreateTaskModal = ({ onClose, onCreate }) => {
           <button className="close-x" onClick={onClose}>&times;</button>
         </div>
 
-        {/* SCROLLABLE FORM BODY */}
         <form onSubmit={handleSubmit} className="task-modal-form">
           <div className="form-inner-body">
             <div className="task-input-group">
@@ -130,7 +137,10 @@ const CreateTaskModal = ({ onClose, onCreate }) => {
                 <select name="assignedTo" className="task-custom-input" value={formData.assignedTo} onChange={handleChange} required>
                   <option value="">Select Team Member</option>
                   {users.map((u) => (
-                    <option key={u._id} value={u._id}>{u.name}</option>
+                    <option key={u._id} value={u._id}>
+                      {/* This line now shows the name and the email together */}
+                      {u.name} {u.email ? `(${u.email})` : ""}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -143,7 +153,6 @@ const CreateTaskModal = ({ onClose, onCreate }) => {
             {error && <div className="task-error-msg">{error}</div>}
           </div>
 
-          {/* FIXED FOOTER WITH BUTTONS */}
           <div className="task-modal-footer">
             <button type="button" className="task-btn-secondary" onClick={onClose}>
               Cancel

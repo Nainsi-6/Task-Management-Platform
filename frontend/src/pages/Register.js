@@ -22,7 +22,9 @@ const Register = () => {
 
     try {
       await register(name, email, password, role)
-      navigate("/dashboard")
+     navigate("/login", { 
+        state: { message: "Registration successful! Please login to continue." } 
+      })
     } catch (err) {
       setError(err.response?.data?.error || "Registration failed")
     } finally {
